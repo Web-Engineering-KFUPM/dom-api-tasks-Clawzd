@@ -124,3 +124,31 @@ data.main.temp      → temperature (°C)
 data.main.humidity  → humidity (%)
 data.wind.speed     → wind speed (m/s)
 */
+
+
+const weatherBtn = document.getElementById("t4-loadWx");
+  const tempEl = document.getElementById("t4-temp");
+  const humEl = document.getElementById("t4-hum");
+  const windEl = document.getElementById("t4-wind");
+
+  weatherBtn.addEventListener("click", async function () {
+    
+    const API_KEY = "3fc29fa6c9b5ed4fbc88146ea0979275";
+    const url = "https://api.openweathermap.org/data/2.5/weather?q=Dammam&appid=${API_KEY}&units=metric";
+
+    weatherBtn.disabled = true;
+    tempEl.textContent = "Loading...";
+    humEl.textContent = "";
+    windEl.textContent = "";
+
+    
+      const res = await fetch(url);
+      
+      const data = await res.json();
+
+      tempEl.textContent = "Temperature: ${data.main.temp} °C";
+      humEl.textContent = "Humidity: ${data.main.humidity}%";
+      windEl.textContent = "Wind Speed: ${data.wind.speed} m/s";
+    }
+    
+);
