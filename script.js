@@ -19,8 +19,9 @@ inside the <p> element with id="t1-msg".
 💡 Hint:
 document.getElementById("t1-msg").innerHTML = "Hello, World!";
 */
- 
 
+const welcome = document.getElementById("t1-msg");
+  welcome.textContent = "Hello, World!";
 /*  
 =======================================
 TODO2: Interaction Corner
@@ -40,7 +41,16 @@ button.addEventListener("click", function () {
     // change text here
 });
 */
- 
+
+
+
+const Btn = document.getElementById("t2-btn");
+const Status = document.getElementById("t2-status");
+
+Btn.addEventListener("click", function () {
+    Status.textContent = "You clicked the button!";
+  });
+
 
 /*  
 =======================================
@@ -57,6 +67,9 @@ https://dummyjson.com/quotes/random
     - Display the quote text inside the <p> with id="t3-quote".
     - Display the author inside the <p> with id="t3-author".
 
+
+    
+
 💡 Hint:
 The API returns JSON like:
 {
@@ -69,6 +82,23 @@ data.content   // the quote text
 data.author    // the author
 */
  
+  const quoteBtn = document.getElementById("t3-loadQuote");
+  const quoteText = document.getElementById("t3-quote");
+  const quoteAuthor = document.getElementById("t3-author");
+
+  quoteBtn.addEventListener("click", async function () {
+    quoteText.textContent = "Loading";
+    quoteAuthor.textContent = "";
+
+    
+      const res = await fetch("https://dummyjson.com/quotes/random");
+      const data = await res.json();
+      quoteText.textContent = `"${data.quote || data.content}"`;
+      quoteAuthor.textContent = `– ${data.author}`;
+    
+  });
+
+
 
 /*  
 =======================================
@@ -94,3 +124,31 @@ data.main.temp      → temperature (°C)
 data.main.humidity  → humidity (%)
 data.wind.speed     → wind speed (m/s)
 */
+
+
+const weatherBtn = document.getElementById("t4-loadWx");
+  const tempEl = document.getElementById("t4-temp");
+  const humEl = document.getElementById("t4-hum");
+  const windEl = document.getElementById("t4-wind");
+
+  weatherBtn.addEventListener("click", async function () {
+    
+    const API_KEY = "3fc29fa6c9b5ed4fbc88146ea0979275";
+    const url = "https://api.openweathermap.org/data/2.5/weather?q=Dammam&appid=${API_KEY}&units=metric";
+
+    weatherBtn.disabled = true;
+    tempEl.textContent = "Loading...";
+    humEl.textContent = "";
+    windEl.textContent = "";
+
+    
+      const res = await fetch(url);
+      
+      const data = await res.json();
+
+      tempEl.textContent = "Temperature: ${data.main.temp} °C";
+      humEl.textContent = "Humidity: ${data.main.humidity}%";
+      windEl.textContent = "Wind Speed: ${data.wind.speed} m/s";
+    }
+    
+);
