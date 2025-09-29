@@ -19,8 +19,9 @@ inside the <p> element with id="t1-msg".
 💡 Hint:
 document.getElementById("t1-msg").innerHTML = "Hello, World!";
 */
- 
 
+const welcome = document.getElementById("t1-msg");
+  welcome.textContent = "Hello, World!";
 /*  
 =======================================
 TODO2: Interaction Corner
@@ -40,7 +41,9 @@ button.addEventListener("click", function () {
     // change text here
 });
 */
- 
+
+
+
 
 /*  
 =======================================
@@ -57,6 +60,9 @@ https://dummyjson.com/quotes/random
     - Display the quote text inside the <p> with id="t3-quote".
     - Display the author inside the <p> with id="t3-author".
 
+
+    
+
 💡 Hint:
 The API returns JSON like:
 {
@@ -69,6 +75,7 @@ data.content   // the quote text
 data.author    // the author
 */
  
+
 
 /*  
 =======================================
